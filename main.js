@@ -1,19 +1,30 @@
 const letters = document.querySelectorAll(".box");
 console.log(letters);
-const ASNWER_LENGTH = 5;
+const ANSWER_LENGTH = 5;
 
 async function init() {
-  let currentGuesss = "";
+    let currentRow = 0;
+    let currentGuess = "";
 
   function addLetter(letter) {
-    if (currentGuesss.length < ASNWER_LENGTH) {
-      currentGuesss += letter;
+    if (currentGuess.length < ANSWER_LENGTH) {
+      currentGuess += letter;
     } else {
-      currentGuesss =
-        currentGuesss.substring(0, currentGuesss.length - 1) + letter;
+      currentGuess =
+        currentGuess.substring(0, currentGuess.length - 1) + letter;
     }
 
-    letters[currentGuesss.length - 1].innerText = letter;
+    letters[currentRow * ANSWER_LENGTH + currentGuess.length - 1].innerText =
+    letter;
+  }
+
+  async function commit() {
+    if (currentGuess.length != ANSWER_LENGTH) {
+      return;
+    }
+
+    currentRow++;
+    currentGuess = "";
   }
 
   document.addEventListener("keydown", function handleKeyPress(event) {
