@@ -3,8 +3,8 @@ console.log(letters);
 const ANSWER_LENGTH = 5;
 
 async function init() {
-    let currentRow = 0;
-    let currentGuess = "";
+  let currentRow = 0;
+  let currentGuess = "";
 
   function addLetter(letter) {
     if (currentGuess.length < ANSWER_LENGTH) {
@@ -15,7 +15,7 @@ async function init() {
     }
 
     letters[currentRow * ANSWER_LENGTH + currentGuess.length - 1].innerText =
-    letter;
+      letter;
   }
 
   async function commit() {
@@ -25,6 +25,11 @@ async function init() {
 
     currentRow++;
     currentGuess = "";
+  }
+
+  function backspace() {
+    currentGuess = currentGuess.substring(0, currentGuess.length - 1);
+    letters[currentRow * ANSWER_LENGTH + currentGuess.length].innerText = "";
   }
 
   document.addEventListener("keydown", function handleKeyPress(event) {
